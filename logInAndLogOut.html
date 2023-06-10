@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in and out</title>
+</head>
+<body>
+    <header>Log in and out</header>
+    <br>
+    <br>
+    <main>
+        <div>
+            <label>Please input your staff number: 
+                <br>
+                Press Command+Option+I to see the staff list.</label>
+            <br>
+            <input id="input-number" placeholder="4-digital">
+        </div>
+        <br>
+        <div>
+            <p>Please log in and log out</p>
+            <button id="log-in">Log In</button>
+            <button id="log-out">Log Out</button>
+        </div>
+        <br>
+        <br>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Situation</th>
+                <th>Time</th>
+            </thead>
+            <tbody>
+                <td id="staff-name"></td>
+                <td id="staff-number"></td>
+                <td id="log-situation"></td>
+                <td id="log-time"></td>
+            </tbody>
+        </table>
+        <div>
+            <button id="clear-up">Clear Up</button>
+        </div>       
+    </main>
+
+
+    <script>
+
+
+        // console.log员工和员工号列表
+        let staffNum = [2001, 2002, 2003, 2004, 2020];
+
+        let staffName = ["Stan", "Jack", "Norm", "Nick", "Rich"];
+
+        function nameAndNumberList () {
+            for(let i=0; i<staffNum.length && i<staffName.length; i++){
+                console.log(staffNum[i], staffName[i])
+            }           
+        }
+        nameAndNumberList();
+        
+        // 点击button能够运行的函数
+        document.getElementById("log-in").addEventListener("click", function ()
+            {showLogIn (); 
+                showNameAndNumber(); 
+                logTime()
+            });
+        document.getElementById("log-out").addEventListener("click", function ()
+            {showLogOut(); 
+                showNameAndNumber(); 
+                logTime()
+            });
+
+        // 表单中login和logout的显示（没问题）
+        function showLogIn () {
+            document.getElementById("log-situation").innerHTML = "Log IN"};
+        function showLogOut () {
+            document.getElementById("log-situation").innerHTML = "Log OUT"};
+
+        //表单中显示员工和员工号（没问题）
+        function showNameAndNumber () {
+            let inputStaffNum = parseInt(document.getElementById("input-number").value);
+            let index = staffNum.indexOf(inputStaffNum);
+            if (index !== -1) {
+                document.getElementById("staff-name").innerHTML = staffName[index];
+                document.getElementById("staff-number").innerHTML = inputStaffNum;
+            } else {
+                document.getElementById("staff-name").innerHTML = "";
+                document.getElementById("staff-number").innerHTML = "";
+            }
+        }
+
+        //表单中显示时间
+        function logTime () {
+            let date = new Date();
+
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let hour = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+
+            document.getElementById("log-time").innerHTML = day + "-" + month + "-" + year + "  " + hour + ":" + min + ":" + sec
+        }
+
+
+    </script>
+</body>
+</html>
